@@ -1,6 +1,6 @@
 import { DragTarget } from "../models/drag-drop.js";
-import { Component } from "./base-component.js";
-import { autobind } from "../decorators/autobind.js";
+import Component from "./base-component.js";
+import { autobind as Autobind } from "../decorators/autobind.js";
 import { Project, ProjectStatus } from "../models/project.js";
 import { projectState } from "../state/project-state.js";
 import { ProjectItem } from "./project-item.js";
@@ -30,7 +30,7 @@ export class ProjectList
     }
   }
 
-  @autobind
+  @Autobind
   dragOverHandler(event: DragEvent): void {
     if (event.dataTransfer && event.dataTransfer.types[0] === "text/plain") {
       event.preventDefault();
@@ -39,13 +39,13 @@ export class ProjectList
     }
   }
 
-  @autobind
+  @Autobind
   dragLeaveHandler(_: DragEvent): void {
     const listEl = this.element.querySelector("ul")!;
     listEl.classList.remove("droppable");
   }
 
-  @autobind
+  @Autobind
   dropHandler(event: DragEvent): void {
     const prjId = event.dataTransfer!.getData("text/plain");
     projectState.moveProject(
